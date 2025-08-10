@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.24.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="最近在设计一些会员商品的有效、过期展示，但是在同一个滚动列表下出现了三种不同风格的单元卡片，为了避免通过标记区分来在单个布局文件上进行堆叠的冗余效果，最终决定通过 MultiAdapter 和多种自定义 RecyclerView 的方式实现同一滚动区域下不同  1.如何建立宏观 Card 与 CardInfo 的联系？ 首先要继承 BasequickAdapter&lt;CustomCardIn">
+    <meta name="description" content="最近在设计一些会员商品的有效、过期展示，但是在同一个滚动列表下出现了三种不同风格的单元卡片，为了避免通过标记区分来在单个布局文件上进行堆叠的冗余效果，最终决定通过 MultiAdapter 和多种自定义 RecyclerView 的方式实现同一滚动区域下不同  1.如何建立宏观 Card 与 CardInfo 的联系？ 首先要继承 ‘BasequickAdapter&lt;CustomCardI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滑动窗口的多样性单元设计">
 <meta property="og:url" content="http://example.com/2025/08/11/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E5%A4%9A%E6%A0%B7%E6%80%A7%E5%8D%95%E5%85%83%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Tencent Champagne1219">
-<meta property="og:description" content="最近在设计一些会员商品的有效、过期展示，但是在同一个滚动列表下出现了三种不同风格的单元卡片，为了避免通过标记区分来在单个布局文件上进行堆叠的冗余效果，最终决定通过 MultiAdapter 和多种自定义 RecyclerView 的方式实现同一滚动区域下不同  1.如何建立宏观 Card 与 CardInfo 的联系？ 首先要继承 BasequickAdapter&lt;CustomCardIn">
+<meta property="og:description" content="最近在设计一些会员商品的有效、过期展示，但是在同一个滚动列表下出现了三种不同风格的单元卡片，为了避免通过标记区分来在单个布局文件上进行堆叠的冗余效果，最终决定通过 MultiAdapter 和多种自定义 RecyclerView 的方式实现同一滚动区域下不同  1.如何建立宏观 Card 与 CardInfo 的联系？ 首先要继承 ‘BasequickAdapter&lt;CustomCardI">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-10T16:32:13.000Z">
-<meta property="article:modified_time" content="2025-08-10T17:22:06.822Z">
+<meta property="article:modified_time" content="2025-08-10T17:24:30.097Z">
 <meta property="article:author" content="Champagne">
 <meta property="article:tag" content="RecyclerView">
 <meta property="article:tag" content="MultiItemAdapter">
@@ -209,7 +209,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-08-11 00:32:13 / 修改时间：01:22:06" itemprop="dateCreated datePublished" datetime="2025-08-11T00:32:13+08:00">2025-08-11</time>
+      <time title="创建时间：2025-08-11 00:32:13 / 修改时间：01:24:30" itemprop="dateCreated datePublished" datetime="2025-08-11T00:32:13+08:00">2025-08-11</time>
     </span>
 
   
@@ -226,7 +226,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>789</span>
+      <span>793</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -247,8 +247,8 @@
 <p>最近在设计一些会员商品的有效、过期展示，但是在同一个滚动列表下出现了三种不同风格的单元卡片，为了避免通过标记区分来在单个布局文件上进行堆叠的冗余效果，最终决定通过 MultiAdapter 和多种自定义 RecyclerView 的方式实现同一滚动区域下不同</p>
 </blockquote>
 <h1 id="1-如何建立宏观-Card-与-CardInfo-的联系？"><a href="#1-如何建立宏观-Card-与-CardInfo-的联系？" class="headerlink" title="1.如何建立宏观 Card 与 CardInfo 的联系？"></a>1.如何建立宏观 Card 与 CardInfo 的联系？</h1><ol>
-<li>首先要继承 BasequickAdapter&lt;CustomCardInfo，BaseViewHolder&gt; 来实现自定义 Adapter 类</li>
-<li>在初始化方法中传入 List<CustomCardInfo></li>
+<li>首先要继承 ‘BasequickAdapter&lt;CustomCardInfo，BaseViewHolder&gt;’ 来实现自定义 Adapter 类</li>
+<li>在初始化方法中传入 ‘List<CustomCardInfo>‘</li>
 <li>在 convert 方法中传入单个 CustomCardInfo，指定宏观 Card 的 item 布局文件（宽高 wrap_content 即可）创建 Card 实例，然后调用 setInfo 方法为 Card 设置信息</li>
 <li>如果想要为 Card 添加监听器，通过 BaseViewHolder 在 convert 方法中来添加（实际真正的添加手段实在 Adapter 实例中 add 的）</li>
 <li>由于 Card 的 item 布局文件中宽高指定为 wrap_content ，所以卡片真正的大小应该在 covert 中通过 setLayoutManager 来设置的</li>
